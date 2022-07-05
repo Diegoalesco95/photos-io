@@ -1,0 +1,7 @@
+{
+  "name": "photos-io",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
