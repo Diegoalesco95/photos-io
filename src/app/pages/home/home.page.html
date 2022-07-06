@@ -14,8 +14,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Refresher -->
-  <!-- Posts -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <app-posts [posts]="posts"></app-posts>
-  <!-- Infinite Scroll -->
+
+  <ion-infinite-scroll
+    [disabled]="disableInfiniteScroll"
+    threshold="150px"
+    (ionInfinite)="loadMore($event)"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

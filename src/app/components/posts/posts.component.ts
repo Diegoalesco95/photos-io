@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Post } from 'src/app/interfaces/posts.interface';
+import { IPost } from 'src/app/interfaces/posts.interface';
 
 @Component({
   selector: 'app-posts',
@@ -7,11 +7,9 @@ import { Post } from 'src/app/interfaces/posts.interface';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
-  @Input() posts: Post[] = [];
+  @Input() posts: IPost[] = [];
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.posts);
-  }
+  ngOnInit() {}
 }

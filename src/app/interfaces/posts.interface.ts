@@ -1,16 +1,20 @@
-import { User } from "src/app/interfaces/user.interface";
+import { IUser } from 'src/app/interfaces/user.interface';
 
-export interface PostsResponse {
+export interface IPostsResponse {
   count: number;
   page: number;
-  posts: Post[];
+  posts: IPost[];
 }
 
-export interface Post {
+export interface IPost {
   _id?: string;
   message?: string;
   imgs?: string[];
   coords?: string;
-  user?: User;
+  user?: IUser;
   createdAt?: Date;
+}
+
+export interface ICreatPostResponse {
+  post: IPost;
 }

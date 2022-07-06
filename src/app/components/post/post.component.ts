@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Post } from 'src/app/interfaces/posts.interface';
+import { IPost } from 'src/app/interfaces/posts.interface';
 
 @Component({
   selector: 'app-post',
@@ -7,9 +7,11 @@ import { Post } from 'src/app/interfaces/posts.interface';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
-  @Input() post: Post = {};
+  @Input() post: IPost = {};
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // console.log(this.post);
+  }
 }
