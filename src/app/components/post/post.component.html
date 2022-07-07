@@ -9,23 +9,25 @@
     </ion-label>
   </ion-item>
 
-  <!-- <ion-slides pager="true">
+  <ion-slides pager="true" *ngIf="post.imgs.length > 1">
     <ion-slide
       class="image-slide"
-      *ngFor="
-        let image of [
-          '/assets/images/dog-1.jpg',
-          '/assets/images/dog-2.jpg',
-          '/assets/images/dog-3.jpg'
-        ]
-      "
-      [style]="image | domSanitizer"
+      *ngFor="let image of post.imgs"
+      [style]="image | image: post.user._id | domSanitizer"
     >
     </ion-slide>
-    <ion-slide> </ion-slide>
-  </ion-slides> -->
+  </ion-slides>
 
-  <app-map [coords]="post.coords"></app-map>
+  <ion-slides *ngIf="post.imgs.length === 1" [options]="sliderOptions">
+    <ion-slide
+      class="image-slide"
+      *ngFor="let image of post.imgs"
+      [style]="image | image: post.user._id | domSanitizer"
+    >
+    </ion-slide>
+  </ion-slides>
+
+  <app-map *ngIf="post.coords" [coords]="post.coords"></app-map>
 
   <ion-item lines="none">
     <ion-icon slot="start" name="heart-outline"></ion-icon>

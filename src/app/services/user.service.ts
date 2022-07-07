@@ -47,14 +47,14 @@ export class UserService {
     return this.http
       .post<IUserResponse>(`${API_URL}${this.uris.login}`, { email, password })
       .subscribe(
-        (response) => {
-          this.saveToken(response.token);
-          this.uiService.presentAlert('Login successful', 'success');
+        async (response) => {
+          await this.saveToken(response.token);
+          await this.uiService.presentAlert('Login successful', 'success');
           this.uiService.navigateTo('/main/home');
         },
-        (error: HttpErrorResponse) => {
-          this.resetToken();
-          this.uiService.presentAlert(error.error.message, 'danger');
+        async (error: HttpErrorResponse) => {
+          await this.resetToken();
+          await this.uiService.presentAlert(error.error.message, 'danger');
         }
       );
   }
@@ -63,14 +63,14 @@ export class UserService {
     return this.http
       .post<IUserResponse>(`${API_URL}${this.uris.signup}`, user)
       .subscribe(
-        (response) => {
-          this.saveToken(response.token);
-          this.uiService.presentAlert('Signup successful', 'success');
+        async (response) => {
+          await this.saveToken(response.token);
+          await this.uiService.presentAlert('Signup successful', 'success');
           this.uiService.navigateTo('/main/home');
         },
-        (error: HttpErrorResponse) => {
-          this.resetToken();
-          this.uiService.presentAlert(error.error.message, 'danger');
+        async (error: HttpErrorResponse) => {
+          await this.resetToken();
+          await this.uiService.presentAlert(error.error.message, 'danger');
         }
       );
   }
@@ -111,14 +111,15 @@ export class UserService {
     });
   }
 
-  saveToken(token: string) {
+  async saveToken(token: string) {
     this.token = token;
-    this.storageService.save('token', token);
+    await this.storageService.save('token', token);
+    this.veryifyToken();
   }
 
   async resetToken() {
     this.token = null;
-    this.storageService.remove('token');
+    await this.storageService.remove('token');
   }
 
   updateUser(user: IUser) {
@@ -138,5 +139,10 @@ export class UserService {
           this.uiService.presentAlert(error.error.message, 'danger');
         }
       );
+  }
+
+  async logout() {
+    await this.resetToken();
+    this.uiService.navigateTo('/login');
   }
 }

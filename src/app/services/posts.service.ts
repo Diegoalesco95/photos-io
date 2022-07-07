@@ -1,6 +1,11 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {
+  FileTransfer,
+  FileUploadOptions,
+  FileTransferObject,
+} from '@awesome-cordova-plugins/file-transfer/ngx';
 
 import {
   ICreatPostResponse,
@@ -22,7 +27,8 @@ export class PostsService {
   constructor(
     private http: HttpClient,
     private userService: UserService,
-    private uiService: UiService
+    private uiService: UiService,
+    private transfer: FileTransfer
   ) {}
 
   getPosts(reset?: boolean) {
@@ -57,5 +63,24 @@ export class PostsService {
           this.uiService.presentAlert(error.error.message, 'danger');
         }
       );
+  }
+
+  async uploadImage(image: string) {
+    const token = await this.userService.getToken();
+    const options: FileUploadOptions = {
+      fileKey: 'image',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    };
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    return fileTransfer
+      .upload(image, `${API_URL}/posts/upload`, options)
+      .then((data) => {
+        // TODO
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

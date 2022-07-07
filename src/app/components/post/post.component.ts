@@ -8,10 +8,12 @@ import { IPost } from 'src/app/interfaces/posts.interface';
 })
 export class PostComponent implements OnInit {
   @Input() post: IPost = {};
+  sliderOptions = {
+    allowSlideNext: false,
+    allowSlidePrev: false,
+  };
 
   constructor() {}
 
-  ngOnInit() {
-    // console.log(this.post);
-  }
+  ngOnInit() {}
 }

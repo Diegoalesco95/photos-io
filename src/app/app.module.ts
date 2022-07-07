@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { FileTransfer } from '@awesome-cordova-plugins/file-transfer/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
+    Camera,
+    FileTransfer,
   ],
   bootstrap: [AppComponent],
 })

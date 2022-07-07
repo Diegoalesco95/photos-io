@@ -25,17 +25,13 @@ export class StorageService {
     }
   }
 
-  save(key: string, value: any) {
-    try {
-      this.storage.set(key, value);
-    } catch (error) {
-      console.log(error);
-    }
+  async save(key: string, value: any) {
+    await this.storage.set(key, value);
   }
 
-  remove(key: string) {
+  async remove(key: string) {
     try {
-      this.storage.remove(key);
+      await this.storage.remove(key);
     } catch (error) {
       console.log(error);
     }

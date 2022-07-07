@@ -19,7 +19,9 @@ export class ProfilePage implements OnInit {
     this.onSelectAvatar(this.user.avatar);
   }
 
-  logout() {}
+  logout() {
+    this.userService.logout();
+  }
 
   onSelectAvatar(avatar: string) {
     this.selectedAvatar = avatar;

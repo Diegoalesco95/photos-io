@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IPost } from 'src/app/interfaces/posts.interface';
 import { PostsService } from 'src/app/services/posts.service';
 
@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
   constructor(private postsService: PostsService) {}
 
   ngOnInit(): void {
-    this.loadMore();
+    this.doRefresh(null);
     this.postsService.newPost.subscribe((post) => {
       this.posts.unshift(post);
     });
@@ -27,6 +27,8 @@ export class HomePage implements OnInit {
   }
 
   loadMore(event?, reset: boolean = false) {
+    console.log('loadMore');
+
     this.postsService.getPosts(reset).subscribe((response) => {
       this.posts = [...this.posts, ...response.posts];
 
